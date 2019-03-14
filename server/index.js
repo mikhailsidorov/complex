@@ -1,13 +1,11 @@
-const keys = require('./keys');
+const keys = require('./keys')
 const redis = require('redis')
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const { Pool } = require('pg')
 
-
-
-cosnt app = express()
+const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
@@ -20,8 +18,7 @@ const pgClient = new Pool({
 })
 
 pgClient.on('error', () => console.log('Lost PG connection'))
-pgClient.query('CREATE TABLE IF NOT EXISTS values (number INT)')
-  .catch(err=> console.log(err))
+pgClient.query('CREATE TABLE IF NOT EXISTS values (number INT)').catch(err => console.log(err))
 
 const redisClient = redis.createClient({
   host: keys.redisHost,
@@ -53,7 +50,7 @@ app.post('/values', async (req, res) => {
   }
 
   redisClient.hset('values', index, 'Nothing yet!')
-  redisPublisher.publish('insert' index)
+  redisPublisher.publish('insert', index)
   pgClient.query('INSERT INTO values(number) VALUES($1)', [index])
   res.send({ working: true })
 })
