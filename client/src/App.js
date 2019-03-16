@@ -12,11 +12,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-
-            <Link to="/home">Home</Link>
+            <Link to="/">Home</Link>
             <Link to="/otherpage">Other page</Link>
           </header>
           <div>
