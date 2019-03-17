@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t mikhailsidorov/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t "$DOCKER_ID"/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run --env CI=true mikhailsidorov/react-test npm test
+  - docker run --env CI=true "$DOCKER_ID"/react-test npm test
 
 after_success:
-  - docker build -t mikhailsidorov/multi-client ./client
-  - docker build -t mikhailsidorov/multi-nginx ./nginx
-  - docker build -t mikhailsidorov/multi-server ./server
-  - docker build -t mikhailsidorov/multi-worker ./worker
+  - docker build -t "$DOCKER_ID"/multi-client ./client
+  - docker build -t "$DOCKER_ID"/multi-nginx ./nginx
+  - docker build -t "$DOCKER_ID"/multi-server ./server
+  - docker build -t "$DOCKER_ID"/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-  - docker build -t mikhailsidorov/multi-client
-  - docker build -t mikhailsidorov/multi-nginx
-  - docker build -t mikhailsidorov/multi-server
-  - docker build -t mikhailsidorov/multi-worker
+  - docker push "$DOCKER_ID"/multi-client
+  - docker push "$DOCKER_ID"/multi-nginx
+  - docker push "$DOCKER_ID"/multi-server
+  - docker push "$DOCKER_ID"/multi-worker
