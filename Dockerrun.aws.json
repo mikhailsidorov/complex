@@ -1,6 +1,7 @@
 {
     "AWSEBDockerrunVersion": 2,
-    "containerDefinitions": [{
+    "containerDefinitions": [
+    {
             "name": "client",
             "image": "mikhailsidorov/multi-client",
             "hostname": "client",
@@ -26,7 +27,8 @@
             "image": "mikhailsidorov/multi-nginx",
             "hostname": "nginx",
             "essential": true,
-            "portMappings": [{
+      "portMappings": [
+        {
                 "hostPort": 80,
                 "containerPort": 80
             }],

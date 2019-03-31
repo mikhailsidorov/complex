@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-WORKDIR /app
+WORKDIR "/app"
 COPY ./package.json ./
 COPY ./package-lock.json ./
 RUN npm install
